@@ -1,0 +1,23 @@
+name: CI for Our Website
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Build HTML
+      run: |
+        echo "Static site doesn't need to be built."
+
+    - name: Test HTML
+      run: |
+        # Add test coverage here later
+
+
