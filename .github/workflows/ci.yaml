@@ -18,7 +18,7 @@ jobs:
 
     - name: Test HTML
       run: |
-        # Add test coverage here later
+        # Add test coverage here later in the future
 
 
   deploy:
