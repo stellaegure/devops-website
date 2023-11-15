@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - ch-fix-deploy-pipeline
 
 jobs:
   build:
