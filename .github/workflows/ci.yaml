@@ -20,8 +20,6 @@ jobs:
       run: |
         # Add test coverage here later
 
-    - name: Deploy to staging
-
 
   deploy:
     runs-on: ubuntu-latest
