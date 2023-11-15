@@ -20,6 +20,28 @@ jobs:
       run: |
         # Add test coverage here later
 
+    - name: Deploy to staging
+
+
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -t rsa ${{ secrets.EC2_INSTANCE_IP }} >> ~/.ssh/known_hosts
+
+    - name: Deploy to EC2
+      run: |
+        ssh -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_INSTANCE_IP }} 'bash -s' < deploy-script.sh
+
+
   performance_test:
     runs-on: ubuntu-latest
 
