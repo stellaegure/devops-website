@@ -19,8 +19,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install cypress
+          npm install
 
       - name: Run Cypress tests
         run: |
-          cypress run
+          npm run cy:run
