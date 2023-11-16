@@ -34,13 +34,15 @@ jobs:
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 400 ~/.ssh/id_rsa
-        cat ~/.ssh/known_hosts
-        ssh-keyscan -t rsa ${{ secrets.EC2_INSTANCE_IP }} 2>/dev/null >> ~/.ssh/known_hosts
+        chmod 600 ~/.ssh/id_rsa
+        #ls -lah ~/.ssh
+        #cat ~/.ssh/id_rsa
+        #ssh-keyscan -t rsa ${{ secrets.EC2_INSTANCE_IP }} 2>/dev/null >> ~/.ssh/known_hosts
 
     - name: Deploy to EC2
       run: |
-        ssh -i ~/.ssh/id_rsa ec2-user@${{ secrets.EC2_INSTANCE_IP }} 'bash -s' < deploy-script.sh
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa \
+            ec2-user@${{ secrets.EC2_INSTANCE_IP }} 'bash -s' < deploy-script.sh
 
 
   performance_test:
