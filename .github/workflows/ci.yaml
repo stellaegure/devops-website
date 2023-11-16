@@ -47,10 +47,10 @@ jobs:
     #        ec2-user@${{ secrets.EC2_INSTANCE_IP }} 'bash -s' < deploy-script.sh
 
     - name: Deploy with rsync to EC2
-      uses: burnette01/rsync-deployments@5.1
+      uses: burnett01/rsync-deployments@6.0.0
       with:
         switches: -avzr --delete
-        path: ./*
+        path: ./
         remote_path: /usr/share/nginx/html
         remote_host: ${{ secrets.EC2_INSTANCE_IP }}
         remote_user: ec2-user
