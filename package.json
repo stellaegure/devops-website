@@ -1,9 +1,0 @@
-{
-  "name": "Website",
-  "scripts": {
-    "cy:run": "cypress run"
-  },
-  "dependencies": {
-    "cypress": "*"
-  }
-}
