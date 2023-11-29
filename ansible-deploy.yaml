@@ -1,4 +1,4 @@
-name: Install Nginx and deploy
+- name: Install Nginx and deploy
   hosts: webhost
   become: yes
   become_user: root
