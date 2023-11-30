@@ -7,6 +7,24 @@ on:
       - project
 
 jobs:
+
+
+  sonarqube-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
   stage:
       runs-on: ubuntu-latest
 
@@ -27,3 +45,4 @@ jobs:
               ${{ secrets.EC2_INSTANCE_IP }}
               [webhost]
               ${{ secrets.EC2_INSTANCE_IP }}
+  
