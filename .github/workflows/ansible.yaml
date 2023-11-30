@@ -36,12 +36,13 @@ jobs:
           with:
             playbook: ansible-deploy.yaml
             directory: ./
-            key: ${{ secrets.EC2_SSH_PRIVATE_KEY2 }}
+            key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
             options: |
               --user ubuntu
             inventory: |
               [all]
               ${{ secrets.EC2_INSTANCE_IP }}
+
               [webhost]
               ${{ secrets.EC2_INSTANCE_IP }}
   
