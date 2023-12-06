@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "server": "http-server -p 3000 &",
+    "cy:test": "cypress run"
+  },
+  "dependencies": {
+    "cypress": "^13.6.1",
+    "http-server": "^14.1.1"
+  }
+}

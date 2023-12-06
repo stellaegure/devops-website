@@ -7,6 +7,30 @@ on:
       - project
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Start http server
+        run: |
+          npm run server
+
+      - name: Run Cypress tests
+        run: |
+          npm run cy:test
+
 
 
   #sonarqube-analysis:
