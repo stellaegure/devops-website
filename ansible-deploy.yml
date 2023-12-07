@@ -7,7 +7,7 @@
     - name: Install Docker
       become: yes
       apt:
-        name: docker.io
+        name: docker
         state: present
 
     - name: Pull Docker Image
