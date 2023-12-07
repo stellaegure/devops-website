@@ -12,7 +12,7 @@
 
     - name: Pull Docker Image
       docker_image:
-        name:segure/projdocker:latest
+        name: ssegure/projdocker:latest
         source: pull
 
     - name: Run Docker Container
