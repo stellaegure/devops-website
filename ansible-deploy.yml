@@ -21,15 +21,24 @@
         state: latest
         update_cache: true
 
+    - name: Docker Login
+      shell: |
+        echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_USERNAME}" --password-stdin
+      environment:
+        DOCKER_USERNAME: "{{ lookup('env', 'DOCKER_USERNAME') }}"
+        DOCKER_PASSWORD: "{{ lookup('env', 'DOCKER_PASSWORD') }}"
+      ignore_errors: yes
+
+
     - name: Pull Docker Image
       docker_image:
-        name: segure/projdocker:latest
+        name: {{ DOCKER_IMAGENAME }}:latest
         source: pull
 
     - name: Run Docker Container
       docker_container:
         name: major_container
-        image: segure/projdocker:latest
+        image: {{ DOCKER_IMAGENAME }}:latest
         state: started
         ports:
           - "80:80"

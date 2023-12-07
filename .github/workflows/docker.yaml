@@ -40,6 +40,10 @@ jobs:
 
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
+        env:
+           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+           DOCKER_IMAGENAME: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGENAME }}:latest
         with:
           playbook: ansible-deploy.yml
           directory: ./
