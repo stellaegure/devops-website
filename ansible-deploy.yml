@@ -5,9 +5,19 @@
 
   tasks:
 
-    - name: Update apt and install docker.io
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Update apt and install docker-ce
       apt:
-        name: docker.io
+        name: docker-ce
         state: latest
         update_cache: true
 
@@ -22,13 +32,13 @@
 
     - name: Pull Docker Image
       docker_image:
-        name: segure/projdocker:latest
+        name: "{{ lookup('env', 'DOCKER_IMAGENAME') }}"
         source: pull
 
     - name: Run Docker Container
       docker_container:
         name: major_container
-        image: segure/projdocker:latest
+        image: "{{ lookup('env', 'DOCKER_IMAGENAME') }}"
         state: started
         ports:
           - "80:80"
