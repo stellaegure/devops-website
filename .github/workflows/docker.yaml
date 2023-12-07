@@ -29,6 +29,25 @@ jobs:
             --platform linux/amd64,linux/arm64 --push \
             -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGENAME }}:latest \
             -f ./Dockerfile .
+  
+  deploy-to-ec2:
+    runs-on: ubuntu-latest
 
-      #- name: Push Docker Image
-        #run: docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGENAME }}:latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: ansible-deploy.yml
+          directory: ./
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          options: |
+            --user ${{ secrets.EC2_REMOTE_USER }}
+          inventory: |
+            [all]
+            ${{ secrets.EC2_INSTANCE_IP }}
+
+            [webhost]
+            ${{ secrets.EC2_INSTANCE_IP }}
