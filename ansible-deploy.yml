@@ -32,13 +32,13 @@
 
     - name: Pull Docker Image
       docker_image:
-        name: {{ DOCKER_IMAGENAME }}:latest
+        name: {{ DOCKER_IMAGENAME }}
         source: pull
 
     - name: Run Docker Container
       docker_container:
         name: major_container
-        image: {{ DOCKER_IMAGENAME }}:latest
+        image: {{ DOCKER_IMAGENAME }}
         state: started
         ports:
           - "80:80"
