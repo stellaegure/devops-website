@@ -4,8 +4,18 @@
   become: yes
 
   tasks:
-    - name: Install Docker
-      become: yes
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Update apt and install docker-ce
       apt:
         name: docker-ce
         state: latest
@@ -13,7 +23,7 @@
 
     - name: Pull Docker Image
       docker_image:
-        name: ssegure/projdocker:latest
+        name: segure/projdocker:latest
         source: pull
 
     - name: Run Docker Container
