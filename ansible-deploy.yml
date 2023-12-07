@@ -7,8 +7,9 @@
     - name: Install Docker
       become: yes
       apt:
-        name: docker
-        state: present
+        name: docker-ce
+        state: latest
+        update_cache: true
 
     - name: Pull Docker Image
       docker_image:
